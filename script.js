@@ -2,6 +2,7 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const hitCountLabel = document.getElementById('hitCount');
 const cornerCountLabel = document.getElementById('cornerCount');
+const HitSound = new Audio('pop_7e9Is8L.mp3'); // Replace 'cartoon-boing-sound.mp3' with your sound file
 
 // Square properties
 let square = {
@@ -37,6 +38,7 @@ function draw() {
     hitCount++;
     hitVertical = true;
     updateHits();
+    HitSound.play();
   }
 
   if (square.y + square.size / 2 > canvas.height || square.y - square.size / 2 < 0) {
@@ -44,12 +46,14 @@ function draw() {
     hitCount++;
     hitHorizontal = true;
     updateHits();
+    HitSound.play();
   }
 
   // Check for corner hits
   if (hitVertical && hitHorizontal) {
     cornerCount++;
     updateCornerHits();
+    HitSound.play();
   }
 
   requestAnimationFrame(draw);
